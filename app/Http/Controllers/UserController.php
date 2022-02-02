@@ -13,8 +13,13 @@ class UserController extends Controller
 {
     // Get user list
     public function getuserlist(){
-        $users = User::join('statuses', 'statuses.id', '=', 'users.status')->select(['users.*','statuses.status as statusname'])->get();
-        return view('userlist', compact('users'));
+        if(\Schema::hasTable('users') == true && \Schema::hasTable('statuses') == true){
+            $users = User::join('statuses', 'statuses.id', '=', 'users.status')->select(['users.*','statuses.status as statusname'])->get();
+            return view('userlist', compact('users'));
+        }else{
+            return '<h2>Note :</h2><br>Please check if database configuration is properly set and then run the migration using below command<br><br>php artisan migrate --seed';
+        }
+
     }
 
     //Reload table data after add/edit/delete operations
