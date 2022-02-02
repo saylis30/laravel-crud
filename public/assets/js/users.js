@@ -1,6 +1,6 @@
 $(function(){
-    $('#add_user_form')[0].reset();
-    $("#add_user_form").on('submit', function(e){
+    $('#add_user_form')[0].reset(); //reset the form when add user button is clicked
+    $("#add_user_form").on('submit', function(e){ //When form submit is clicked
         e.preventDefault();
 
         $.ajax({
@@ -18,6 +18,7 @@ $(function(){
             },
             success: function(response){
                 if(response.status == 0){
+                    //check if the action is add or update
                     if (response.hasOwnProperty('action') && response.action == 'update') {
                         $('#addusermodal').modal('hide');
                         toastr.info(response.msg);
@@ -37,6 +38,7 @@ $(function(){
     })
 });
 
+//reset form when user clicks on add user button
 $("#addusers").click(function(){
     $('#add_user_form')[0].reset();
     $('#addusermodalLable').text('Add User');
@@ -44,6 +46,7 @@ $("#addusers").click(function(){
     $('#add_user_form').attr('action', add_user_route);
 });
 
+//Delete the record - softdelete at backend
 function deleteRecord(rowid){
     $.ajax({
         url: 'delete',
@@ -66,6 +69,7 @@ function deleteRecord(rowid){
     });
 }
 
+//Get the record details from DB when user clicks on edit button - To prepopulate the data in form
 function getRecord(rowid){
     $.ajax({
         url: 'edit',
@@ -93,3 +97,9 @@ function getRecord(rowid){
         }
     });
 }
+
+//Export users data when clicked on export button
+$("#exportusers").click(function(){
+    window.open(export_user_route,"_self");
+    return false;
+});

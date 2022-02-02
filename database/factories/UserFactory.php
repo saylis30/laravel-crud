@@ -16,7 +16,8 @@ class UserFactory extends Factory
     {
         return [
             'name' => $this->faker->name(),
-            'mobileno' => $this->faker->unique()->phoneNumber(),
+            #'mobileno' => $this->faker->unique()->phoneNumber(),
+            'mobileno' => $this->faker->numerify('09#########'),
             'email' => $this->faker->unique()->safeEmail(),
             'profilepic' => $this->faker->image('public/assets/images',30,30, null, false),
             'status' => $this->faker->randomElement([1,2])

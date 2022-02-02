@@ -34,5 +34,6 @@
         var add_user_route = "{{route('add-user')}}";
         var edit_user_route = "{{route('edit-user')}}";
         var update_user_route = "{{route('update-user')}}";
+        var export_user_route = "{{route('export-user')}}";
     </script>
 </html>

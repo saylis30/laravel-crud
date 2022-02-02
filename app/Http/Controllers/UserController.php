@@ -6,6 +6,8 @@ use DB;
 use Illuminate\Auth\Events\Validated;
 use Illuminate\Http\Request;
 use Validator;
+use Excel;
+use App\Exports\UserExport;
 
 class UserController extends Controller
 {
@@ -27,7 +29,7 @@ class UserController extends Controller
         $validator = Validator::make($request->all(),[
             'name'=>'required',
             'email'=>'required|email|unique:users,email,NULL,id,deleted_at,NULL',
-            'mobileno'=>'required|unique:users,mobileno,NULL,id,deleted_at,NULL',
+            'mobileno'=>'required|regex:/(09)[0-9]{9}/|min:11|max:11|unique:users,mobileno,NULL,id,deleted_at,NULL',
             'profilepic'=>'required|image|mimes:png,jpeg',
             'status'=>'required',
         ]);
@@ -72,7 +74,7 @@ class UserController extends Controller
         $validator = Validator::make($request->all(),[
             'name'=>'required',
             'email'=>'required|email|unique:users,email,'.$postData['id'].',id,deleted_at,NULL',
-            'mobileno'=>'required|unique:users,mobileno,'.$postData['id'].',id,deleted_at,NULL',
+            'mobileno'=>'required|regex:/(09)[0-9]{9}/|min:11|max:11|unique:users,mobileno,'.$postData['id'].',id,deleted_at,NULL',
             'profilepic'=>'image|mimes:png,jpeg',
             'status'=>'required',
         ]);
@@ -106,5 +108,10 @@ class UserController extends Controller
                 return response()->json(['status'=>0, 'msg'=>'Unable to delete, please try again later.']);
             }
         }
+    }
+
+    //Export user data
+    public function export(){
+        return Excel::download(new UserExport, 'users.xlsx');
     }
 }

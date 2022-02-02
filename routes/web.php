@@ -18,8 +18,9 @@ use Illuminate\Support\Facades\Route;
 });*/
 
 Route::get('/', 'UserController@getuserlist');
-Route::get('/reload-table', 'UserController@reload')->name('user-table-reload');
+Route::get('reload-table', 'UserController@reload')->name('user-table-reload');
 Route::post('add', 'UserController@add')->name('add-user');
 Route::post('delete', 'UserController@delete')->name('delete-user');
 Route::post('edit', 'UserController@edit')->name('edit-user');
 Route::post('update', 'UserController@update')->name('update-user');
+Route::get('export', 'UserController@export')->name('export-user');

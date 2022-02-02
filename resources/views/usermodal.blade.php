@@ -1,4 +1,4 @@
-<form id="add_user_form" method="post" action="{{ route('add-user') }}" data-form="user_form">
+<form id="add_user_form" method="post" action="{{ route('add-user') }}">
     <div class="modal" id="addusermodal" tabindex="-1" aria-labelledby="addusermodalLable" data-bs-backdrop="static" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -20,7 +20,7 @@
                     </div>
                     <div class="form-group mb-3">
                         <label>Mobile number</label>
-                        <input id="mobileno" type="text" class="form-control" name="mobileno" placeholder="Enter your mobile number">
+                        <input id="mobileno" type="text" class="form-control" name="mobileno" placeholder="Enter mobile number eg. 09123456789">
                         <span class="text-danger error-text mobileno_error"></span>
                     </div>
                     <div class="form-group mb-3">
