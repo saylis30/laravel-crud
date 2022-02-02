@@ -11,19 +11,23 @@
         </tr>
     </thead>
     <tbody>
-        @foreach($users as $user)
-            <tr>
-                <th scope="row">{{$user->id}}</th>
-                <td>{{$user->name}}</td>
-                <td>{{$user->email}}</td>
-                <td>{{$user->mobileno}}</td>
-                <td><img src="{{url('assets/images/'.$user->profilepic)}}" height="30" width="30"></img></td>
-                <td>{{$user->statusname}}</td>
-                <td>
-                    <button id="edituser" type="button" class="btn btn-primary btn-sm" onclick="getRecord({{$user->id}});">Edit</button>
-                    <button id="deleteuser" type="button" class="btn btn-danger btn-sm" onclick="deleteRecord({{$user->id}});">Delete</button>
-                </td>
-            </tr>
-        @endforeach
+        @if(!empty($users) && count($users) > 0)
+            @foreach($users as $user)
+                <tr>
+                    <th scope="row">{{$user->id}}</th>
+                    <td>{{$user->name}}</td>
+                    <td>{{$user->email}}</td>
+                    <td>{{$user->mobileno}}</td>
+                    <td><img src="{{url('assets/images/'.$user->profilepic)}}" height="30" width="30"></img></td>
+                    <td>{{$user->statusname}}</td>
+                    <td>
+                        <button id="edituser" type="button" class="btn btn-primary btn-sm" onclick="getRecord({{$user->id}});">Edit</button>
+                        <button id="deleteuser" type="button" class="btn btn-danger btn-sm" onclick="deleteRecord({{$user->id}});">Delete</button>
+                    </td>
+                </tr>
+            @endforeach
+        @else
+            <tr><td colspan="7" class="text-center">No records available</td></tr>
+        @endif
     </tbody>
 </table>

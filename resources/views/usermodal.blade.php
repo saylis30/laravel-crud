@@ -1,4 +1,4 @@
-<form id="add_user_form" method="post" action="{{ route('add-user') }}">
+<form id="add_user_form" method="post" action="{{ route('add-user') }}" data-form="user_form">
     <div class="modal" id="addusermodal" tabindex="-1" aria-labelledby="addusermodalLable" data-bs-backdrop="static" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">

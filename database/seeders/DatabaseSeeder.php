@@ -14,7 +14,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         //To create dummy users data
-        \App\Models\User::factory(5)->create();
+        #\App\Models\User::factory(5)->create();
 
         // To create status table records
         $statusData = [['status' => 'Active'], ['status' => 'Inactive']];

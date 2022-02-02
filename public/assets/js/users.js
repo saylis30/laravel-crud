@@ -1,7 +1,6 @@
 $(function(){
     $('#add_user_form')[0].reset();
     $("#add_user_form").on('submit', function(e){
-        console.log($(this).attr('action'));
         e.preventDefault();
 
         $.ajax({
@@ -19,9 +18,14 @@ $(function(){
             },
             success: function(response){
                 if(response.status == 0){
-                    $.each(response.error, function(prefix, val){
-                        $('span.'+prefix+'_error').text(val[0]);
-                    });
+                    if (response.hasOwnProperty('action') && response.action == 'update') {
+                        $('#addusermodal').modal('hide');
+                        toastr.info(response.msg);
+                    }else{
+                        $.each(response.error, function(prefix, val){
+                            $('span.'+prefix+'_error').text(val[0]);
+                        });
+                    }
                 }else{
                     $('#add_user_form')[0].reset();
                     $('#addusermodal').modal('hide');
@@ -36,6 +40,7 @@ $(function(){
 $("#addusers").click(function(){
     $('#add_user_form')[0].reset();
     $('#addusermodalLable').text('Add User');
+    $('span.error-text').text('');
     $('#add_user_form').attr('action', add_user_route);
 });
 
