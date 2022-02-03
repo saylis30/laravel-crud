@@ -45,7 +45,7 @@ class User extends Authenticatable
         #'email_verified_at' => 'datetime',
     ];
 
-    public function getUsers(){
+    public static function getUsers(){
         $result = User::join('statuses', 'statuses.id', '=', 'users.status')
                 ->select(['users.id','users.name','users.email','users.mobileno','statuses.status as statusname'])->get()->toArray();
 
